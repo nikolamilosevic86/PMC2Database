@@ -1,12 +1,12 @@
 # PMC2Database
 Puts PubMed Central documents (XML) into the database with metadata (title, PMCid,PMid, abstact, journal name, publication year...)
 
-##What is PubMed Central
+==What is PubMed Central==
 PubMed Central® (PMC) is a free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine (NIH/NLM).
 
 [https://www.ncbi.nlm.nih.gov/pmc/](https://www.ncbi.nlm.nih.gov/pmc/)
 
-##How to run
+==How to run==
 Firstly download PubMed Central (PMC) files in XML format. You can do it from [ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/](ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/).
 
 Unpack the tar.gz files. On linux you can use the following command:
@@ -48,5 +48,5 @@ java -jar PMC2Database.jar path/to/unpacked/PMCfiles
 ```
 
 
-##Author
+==Author==
 Nikola Milosevic
