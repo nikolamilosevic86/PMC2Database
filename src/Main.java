@@ -22,7 +22,6 @@ import org.xml.sax.SAXParseException;
 
 public class Main {
 	public static Connection conn = null;
-	public static Statement stmt = null;
 	ResultSet rs = null;
 
 	public static void DataBaseSaver() {
@@ -67,7 +66,8 @@ public class Main {
 			String connectionPassword = database_password;
 			conn = DriverManager.getConnection(connectionUrl, connectionUser,
 					connectionPassword);
-			stmt = conn.createStatement();
+			br.close();
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 			System.out.println("SQLException: " + ex.getMessage());
@@ -82,6 +82,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		String path = args[0];
 		System.out.println("Path:" + path);
+		int count = 0;
 		DataBaseSaver();
 		File[] files = (new File(path)).listFiles();
 		for (File folder : files) {
@@ -114,7 +115,6 @@ public class Main {
 					Document parse = builder.parse(is);
 					art = ParseMetaData(art, parse, xml);
 
-					Statement stmt = conn.createStatement();
 					String insertTableSQL = "INSERT INTO pmc_articles_2017 (PMCid,Title,PMid,Long_abstract,Short_Abstract,XML,publisher_name,publisher_loc,journal_name,year) VALUES (?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement preparedStatement = conn
 							.prepareStatement(insertTableSQL,
@@ -133,7 +133,13 @@ public class Main {
 					int articleId = preparedStatement.executeUpdate();
 					fr.close();
 					reader.close();
-					stmt.close();
+					preparedStatement.close();
+					if(count>10000){
+						count = 0;
+						conn.close();
+						DataBaseSaver();
+					}
+					count++;
 
 				} catch (SAXParseException sex) {
 					sex.printStackTrace();
@@ -143,6 +149,7 @@ public class Main {
 
 			}
 		}
+		
 
 	}
 
