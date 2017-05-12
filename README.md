@@ -1,7 +1,7 @@
 # PMC2Database
 Puts PubMed Central documents (XML) into the database with metadata (title, PMCid,PMid, abstact, journal name, publication year...)
 
-## What is PubMed Central==
+## What is PubMed Central
 PubMed Central® (PMC) is a free full-text archive of biomedical and life sciences journal literature at the U.S. National Institutes of Health's National Library of Medicine (NIH/NLM).
 
 [https://www.ncbi.nlm.nih.gov/pmc/](https://www.ncbi.nlm.nih.gov/pmc/)
@@ -40,7 +40,7 @@ CREATE TABLE `pmc_articles_2017` (
 )
 ```
 
-Once you created a table, edit file called "database". The file should be containing database details (host, port, username and password). 
+Once you created a table, edit file called "database". The file should be containing database details (host, port, username and password) and the name of the table in which information should be stored. 
 
 Once done, you can run the PMC2Database and populate your database. It can be done using the following command:
 ```

@@ -23,6 +23,7 @@ import org.xml.sax.SAXParseException;
 public class Main {
 	public static Connection conn = null;
 	ResultSet rs = null;
+	public static String table_name = "";
 
 	public static void DataBaseSaver() {
 		try {
@@ -53,6 +54,9 @@ public class Main {
 				}
 				if (kv.key.equals("port")) {
 					database_port = kv.value;
+				}
+				if (kv.key.equals("table_name")) {
+					table_name = kv.value;
 				}
 				line = br.readLine();
 			}
@@ -115,7 +119,7 @@ public class Main {
 					Document parse = builder.parse(is);
 					art = ParseMetaData(art, parse, xml);
 
-					String insertTableSQL = "INSERT INTO pmc_articles_2017 (PMCid,Title,PMid,Long_abstract,Short_Abstract,XML,publisher_name,publisher_loc,journal_name,year) VALUES (?,?,?,?,?,?,?,?,?,?)";
+					String insertTableSQL = "INSERT INTO "+table_name+" (PMCid,Title,PMid,Long_abstract,Short_Abstract,XML,publisher_name,publisher_loc,journal_name,year) VALUES (?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement preparedStatement = conn
 							.prepareStatement(insertTableSQL,
 									Statement.RETURN_GENERATED_KEYS);
